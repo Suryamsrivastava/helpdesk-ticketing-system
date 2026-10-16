@@ -1,0 +1,15 @@
+# Production profile: activate with SPRING_PROFILES_ACTIVE=prod.
+# Secrets come from environment variables (see deploy/helpdesk.env.example).
+
+server:
+  # behind Cloudflare Tunnel: trust X-Forwarded-* so redirects and Location headers use https
+  forward-headers-strategy: framework
+
+app:
+  seed:
+    # demo accounts and demo inbound keys are public in the README; never seed them in production
+    enabled: false
+
+logging:
+  level:
+    root: INFO

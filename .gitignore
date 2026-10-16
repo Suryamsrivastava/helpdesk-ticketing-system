@@ -1,0 +1,20 @@
+# backend
+Backend_BE/target/
+Backend_BE/.mvn/wrapper/maven-wrapper.jar
+*.log
+
+# frontend
+Frontend_FE/node_modules/
+Frontend_FE/dist/
+Frontend_FE/.env.local
+
+# deployment secrets and logs
+deploy/helpdesk.env
+deploy/logs/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

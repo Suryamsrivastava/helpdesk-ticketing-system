@@ -1,0 +1,7 @@
+# Windows scripts need CRLF (cmd mis-reads labels with LF); Unix scripts need LF
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+mvnw    text eol=lf
+*.sh    text eol=lf
+
+* text=auto

@@ -1,0 +1,21 @@
+# MySQL for local runs. The backend's defaults (root, empty password, db "helpdesk")
+# match this file, so no environment variables are needed.
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: helpdesk-mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: helpdesk
+    ports:
+      - "3306:3306"
+    volumes:
+      - helpdesk-mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  helpdesk-mysql-data:
