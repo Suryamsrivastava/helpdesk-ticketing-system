@@ -2,6 +2,22 @@
 
 A web application where several organizations manage support tickets side by side. Each organization has its own users and tickets, and **no user can read or change another organization's data**. Isolation is enforced in the backend on every request, not just hidden in the UI.
 
+## Live demo
+
+**https://helpdesk.manageone.me** runs the production build: one Spring Boot jar serving UI + API, MySQL, published through a Cloudflare Tunnel.
+
+- **Create your own tenant.** Click **Register organization** on the login page; you become that organization's Org Admin and can add agents and customers. Several organizations live on the same server and database, and none of them can see yours. (The demo accounts in [Quick start](#1-quick-start) exist only in a local run; the live site seeds no demo data.)
+- **Try email intake in your organization.** As Org Admin open **Email intake**, copy your organization's key, then:
+
+  ```bash
+  curl -X POST https://helpdesk.manageone.me/api/inbound/email \
+    -H "X-Inbound-Key: <your key>" -H "Content-Type: application/json" \
+    -d '{"threadId":"t-1","messageId":"t-1-m1","fromEmail":"someone@example.com","fromName":"Someone","subject":"Printer not working","body":"Hello"}'
+  ```
+
+  The ticket appears under **Needs linking**. Send the same `threadId` with a new `messageId` and it is added as a comment. Use the email of a customer you created and the ticket is linked to them automatically.
+- **A real mailbox is connected too.** A mail to **support@manageone.me** becomes a ticket in the ManageOne organization (Cloudflare Email Routing → Gmail → Apps Script → `POST /api/inbound/email`, see [section 4](#4-email-intake-extra)).
+
 | Part | Stack |
 |---|---|
 | Backend (`Backend_BE`) | Java 17+, Spring Boot 3.5, Spring Security (JWT), Spring Data JPA, Bean Validation, springdoc OpenAPI |

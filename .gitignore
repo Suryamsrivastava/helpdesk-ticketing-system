@@ -12,6 +12,9 @@ Frontend_FE/.env.local
 deploy/helpdesk.env
 deploy/logs/
 
+# deployment notes for the server session (private)
+CLAUDE.md
+
 # IDE / OS
 .idea/
 .vscode/
