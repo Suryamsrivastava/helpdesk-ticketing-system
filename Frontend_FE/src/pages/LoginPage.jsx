@@ -4,7 +4,9 @@ import { useAuth } from '../auth.jsx'
 import { errorText } from '../api.js'
 import { ErrorBanner } from '../components/ui.jsx'
 
-// Seeded demo accounts (see README); clicking one fills the form
+// Seeded demo accounts (see README); clicking one fills the form.
+// Only shown by the dev server: production builds seed no demo data.
+const SHOW_DEMO = import.meta.env.DEV
 const DEMO_ACCOUNTS = [
   { email: 'admin@acme.test', who: 'Acme · Org Admin' },
   { email: 'agent1@acme.test', who: 'Acme · Agent' },
@@ -59,25 +61,27 @@ export default function LoginPage() {
           New organization? <Link to="/register">Register it</Link>
         </p>
 
-        <div className="demo">
-          <div className="demo-title">Demo accounts · password {DEMO_PASSWORD}</div>
-          <div className="demo-list">
-            {DEMO_ACCOUNTS.map((a) => (
-              <button
-                key={a.email}
-                type="button"
-                className="demo-item"
-                onClick={() => {
-                  setEmail(a.email)
-                  setPassword(DEMO_PASSWORD)
-                }}
-              >
-                <span>{a.who}</span>
-                <span className="muted small">{a.email}</span>
-              </button>
-            ))}
+        {SHOW_DEMO && (
+          <div className="demo">
+            <div className="demo-title">Demo accounts · password {DEMO_PASSWORD}</div>
+            <div className="demo-list">
+              {DEMO_ACCOUNTS.map((a) => (
+                <button
+                  key={a.email}
+                  type="button"
+                  className="demo-item"
+                  onClick={() => {
+                    setEmail(a.email)
+                    setPassword(DEMO_PASSWORD)
+                  }}
+                >
+                  <span>{a.who}</span>
+                  <span className="muted small">{a.email}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )

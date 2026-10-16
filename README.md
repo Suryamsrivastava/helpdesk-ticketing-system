@@ -65,7 +65,7 @@ Open **http://localhost:5173**. The dev server proxies `/api` to `http://localho
 
 ### Step 4: sign in with a demo account
 
-All demo accounts use the password **`Password@123`**. The login page also lists them as one-click buttons.
+All demo accounts use the password **`Password@123`**. In a local run (`npm run dev`) the login page also lists them as one-click buttons; production builds hide them.
 
 | Organization | Role | Email |
 |---|---|---|
