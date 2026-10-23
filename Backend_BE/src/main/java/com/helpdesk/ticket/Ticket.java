@@ -12,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -45,8 +44,8 @@ public class Ticket {
     @Column(nullable = false, length = 200)
     private String subject;
 
-    @Lob
-    @Column(nullable = false)
+    // TEXT, not @Lob: on MySQL a @Lob String becomes TINYTEXT (255 bytes)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Enumerated(EnumType.STRING)
